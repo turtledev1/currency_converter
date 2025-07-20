@@ -1,7 +1,8 @@
 import 'package:currency_converter/routing/route_names.dart';
 import 'package:currency_converter/screens/camera_screen.dart';
 import 'package:currency_converter/screens/home_screen.dart';
-import 'package:currency_converter/screens/settings_screen.dart';
+import 'package:currency_converter/screens/splash_screen.dart';
+import 'package:currency_converter/settings/settings_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 
@@ -14,6 +15,11 @@ abstract class RouterModule {
       routes: [
         GoRoute(
           path: '/',
+          name: RouteNames.splash,
+          builder: (context, state) => const SplashScreen(),
+        ),
+        GoRoute(
+          path: '/home',
           name: RouteNames.home,
           builder: (context, state) => const HomeScreen(),
         ),
