@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Screen'),
+        title: const Text('Home'),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -23,8 +23,14 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          spacing: 40,
           children: [
-            Text('Welcome to the Currency Converter!', style: Theme.of(context).textTheme.headlineLarge),
+            Text(
+              'Welcome to the Currency Converter!',
+              style: Theme.of(context).textTheme.headlineLarge,
+              textAlign: TextAlign.center,
+            ),
             FilledButton(
               onPressed: () {
                 context.pushNamed(RouteNames.camera);

@@ -1,4 +1,4 @@
-import 'package:currency_converter/datasources/settings.dart';
+import 'package:currency_converter/datasources/models/settings.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'settings_state.freezed.dart';

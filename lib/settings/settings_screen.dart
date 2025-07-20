@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({
-    super.key,
-  });
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,67 +12,118 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Settings'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          spacing: 24,
+      body: const Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
           children: [
-            Text(
-              'Appearance',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            BlocBuilder<SettingsCubit, SettingsState>(
-              builder: (context, state) {
-                if (state is! SettingsUpdated) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                final themeMode = state.settings.theme;
-                final cubit = context.read<SettingsCubit>();
-
-                return SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ChoiceChip(
-                        label: const Row(
-                          children: [Icon(Icons.settings, size: 18), SizedBox(width: 4), Text('System')],
-                        ),
-                        selected: themeMode == ThemeMode.system,
-                        onSelected: (selected) {
-                          if (selected) cubit.updateSettings(state.settings.copyWith(theme: ThemeMode.system));
-                        },
-                      ),
-                      const SizedBox(width: 8),
-                      ChoiceChip(
-                        label: const Row(
-                          children: [Icon(Icons.light_mode, size: 18), SizedBox(width: 4), Text('Light')],
-                        ),
-                        selected: themeMode == ThemeMode.light,
-                        onSelected: (selected) {
-                          if (selected) cubit.updateSettings(state.settings.copyWith(theme: ThemeMode.light));
-                        },
-                      ),
-                      const SizedBox(width: 8),
-                      ChoiceChip(
-                        label: const Row(
-                          children: [Icon(Icons.dark_mode, size: 18), SizedBox(width: 4), Text('Dark')],
-                        ),
-                        selected: themeMode == ThemeMode.dark,
-                        onSelected: (selected) {
-                          if (selected) cubit.updateSettings(state.settings.copyWith(theme: ThemeMode.dark));
-                        },
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
+            Divider(),
+            AppearanceRow(),
+            Divider(),
+            FromCurrencyRow(),
+            Divider(),
           ],
         ),
       ),
+    );
+  }
+}
+
+class AppearanceRow extends StatelessWidget {
+  const AppearanceRow({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          'Appearance',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        BlocBuilder<SettingsCubit, SettingsState>(
+          builder: (context, state) {
+            if (state is! SettingsUpdated) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            final themeMode = state.settings.theme;
+            final cubit = context.read<SettingsCubit>();
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ChoiceChip(
+                  label: const Row(
+                    children: [Icon(Icons.settings, size: 18), SizedBox(width: 4), Text('System')],
+                  ),
+                  selected: themeMode == ThemeMode.system,
+                  onSelected: (selected) {
+                    if (selected) cubit.updateSettings(state.settings.copyWith(theme: ThemeMode.system));
+                  },
+                ),
+                ChoiceChip(
+                  label: const Row(
+                    children: [Icon(Icons.light_mode, size: 18), SizedBox(width: 4), Text('Light')],
+                  ),
+                  selected: themeMode == ThemeMode.light,
+                  onSelected: (selected) {
+                    if (selected) cubit.updateSettings(state.settings.copyWith(theme: ThemeMode.light));
+                  },
+                ),
+                ChoiceChip(
+                  label: const Row(
+                    children: [Icon(Icons.dark_mode, size: 18), SizedBox(width: 4), Text('Dark')],
+                  ),
+                  selected: themeMode == ThemeMode.dark,
+                  onSelected: (selected) {
+                    if (selected) cubit.updateSettings(state.settings.copyWith(theme: ThemeMode.dark));
+                  },
+                ),
+              ],
+            );
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class FromCurrencyRow extends StatelessWidget {
+  const FromCurrencyRow({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          'From Currency',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        BlocBuilder<SettingsCubit, SettingsState>(
+          builder: (context, state) {
+            if (state is! SettingsUpdated) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            return DropdownButton<String>(
+              value: 'CAD',
+              items: ['CAD', 'USD'].map((currency) {
+                return DropdownMenuItem<String>(
+                  value: currency,
+                  child: Text(currency),
+                );
+              }).toList(),
+              onChanged: (newValue) {
+                if (newValue != null) {
+                  // TODO: change in settings
+                  print('Selected currency: $newValue');
+                }
+              },
+            );
+          },
+        ),
+      ],
     );
   }
 }
