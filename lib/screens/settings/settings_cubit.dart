@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:currency_converter/datasources/local_storage_service.dart';
 import 'package:currency_converter/datasources/models/settings.dart';
-import 'package:currency_converter/settings/settings_state.dart';
+import 'package:currency_converter/screens/settings/settings_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

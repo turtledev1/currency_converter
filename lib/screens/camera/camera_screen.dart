@@ -1,4 +1,5 @@
 import 'package:currency_converter/routing/route_names.dart';
+import 'package:currency_converter/screens/camera/text_recognizer_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -21,9 +22,7 @@ class CameraScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: const Center(
-        child: Text('Camera functionality will be implemented here.'),
-      ),
+      body: const TextRecognizerView(),
     );
   }
 }
