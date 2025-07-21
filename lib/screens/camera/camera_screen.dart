@@ -22,7 +22,7 @@ class CameraScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: const TextRecognizerView(),
+      body: TextRecognizerView(),
     );
   }
 }
