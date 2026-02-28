@@ -1,0 +1,90 @@
+enum Currency {
+  usd,
+  eur,
+  gbp,
+  jpy,
+  cad,
+  aud,
+  chf,
+  cny,
+  inr,
+  krw,
+  mxn,
+  brl,
+  sek,
+  nok,
+  nzd,
+  sgd,
+  hkd,
+  thb;
+
+  String get code => name.toUpperCase();
+
+  String get displayName => switch (this) {
+    Currency.usd => 'US Dollar',
+    Currency.eur => 'Euro',
+    Currency.gbp => 'British Pound',
+    Currency.jpy => 'Japanese Yen',
+    Currency.cad => 'Canadian Dollar',
+    Currency.aud => 'Australian Dollar',
+    Currency.chf => 'Swiss Franc',
+    Currency.cny => 'Chinese Yuan',
+    Currency.inr => 'Indian Rupee',
+    Currency.krw => 'South Korean Won',
+    Currency.mxn => 'Mexican Peso',
+    Currency.brl => 'Brazilian Real',
+    Currency.sek => 'Swedish Krona',
+    Currency.nok => 'Norwegian Krone',
+    Currency.nzd => 'New Zealand Dollar',
+    Currency.sgd => 'Singapore Dollar',
+    Currency.hkd => 'Hong Kong Dollar',
+    Currency.thb => 'Thai Baht',
+  };
+
+  String get symbol => switch (this) {
+    Currency.usd => '\$',
+    Currency.eur => '€',
+    Currency.gbp => '£',
+    Currency.jpy => '¥',
+    Currency.cad => 'CA\$',
+    Currency.aud => 'A\$',
+    Currency.chf => 'Fr',
+    Currency.cny => '¥',
+    Currency.inr => '₹',
+    Currency.krw => '₩',
+    Currency.mxn => 'MX\$',
+    Currency.brl => 'R\$',
+    Currency.sek => 'kr',
+    Currency.nok => 'kr',
+    Currency.nzd => 'NZ\$',
+    Currency.sgd => 'S\$',
+    Currency.hkd => 'HK\$',
+    Currency.thb => '฿',
+  };
+
+  String get flag => switch (this) {
+    Currency.usd => '🇺🇸',
+    Currency.eur => '🇪🇺',
+    Currency.gbp => '🇬🇧',
+    Currency.jpy => '🇯🇵',
+    Currency.cad => '🇨🇦',
+    Currency.aud => '🇦🇺',
+    Currency.chf => '🇨🇭',
+    Currency.cny => '🇨🇳',
+    Currency.inr => '🇮🇳',
+    Currency.krw => '🇰🇷',
+    Currency.mxn => '🇲🇽',
+    Currency.brl => '🇧🇷',
+    Currency.sek => '🇸🇪',
+    Currency.nok => '🇳🇴',
+    Currency.nzd => '🇳🇿',
+    Currency.sgd => '🇸🇬',
+    Currency.hkd => '🇭🇰',
+    Currency.thb => '🇹🇭',
+  };
+
+  static Currency fromCode(String code) => Currency.values.firstWhere(
+    (currency) => currency.code == code.toUpperCase(),
+    orElse: () => Currency.usd,
+  );
+}

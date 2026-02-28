@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Settings {
 
- ThemeMode get theme;
+ ThemeMode get theme; Currency get sourceCurrency; Currency get targetCurrency;
 /// Create a copy of Settings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $SettingsCopyWith<Settings> get copyWith => _$SettingsCopyWithImpl<Settings>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Settings&&(identical(other.theme, theme) || other.theme == theme));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Settings&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.sourceCurrency, sourceCurrency) || other.sourceCurrency == sourceCurrency)&&(identical(other.targetCurrency, targetCurrency) || other.targetCurrency == targetCurrency));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,theme);
+int get hashCode => Object.hash(runtimeType,theme,sourceCurrency,targetCurrency);
 
 @override
 String toString() {
-  return 'Settings(theme: $theme)';
+  return 'Settings(theme: $theme, sourceCurrency: $sourceCurrency, targetCurrency: $targetCurrency)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $SettingsCopyWith<$Res>  {
   factory $SettingsCopyWith(Settings value, $Res Function(Settings) _then) = _$SettingsCopyWithImpl;
 @useResult
 $Res call({
- ThemeMode theme
+ ThemeMode theme, Currency sourceCurrency, Currency targetCurrency
 });
 
 
@@ -65,10 +65,12 @@ class _$SettingsCopyWithImpl<$Res>
 
 /// Create a copy of Settings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? theme = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? theme = null,Object? sourceCurrency = null,Object? targetCurrency = null,}) {
   return _then(_self.copyWith(
 theme: null == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
-as ThemeMode,
+as ThemeMode,sourceCurrency: null == sourceCurrency ? _self.sourceCurrency : sourceCurrency // ignore: cast_nullable_to_non_nullable
+as Currency,targetCurrency: null == targetCurrency ? _self.targetCurrency : targetCurrency // ignore: cast_nullable_to_non_nullable
+as Currency,
   ));
 }
 
@@ -153,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ThemeMode theme)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ThemeMode theme,  Currency sourceCurrency,  Currency targetCurrency)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Settings() when $default != null:
-return $default(_that.theme);case _:
+return $default(_that.theme,_that.sourceCurrency,_that.targetCurrency);case _:
   return orElse();
 
 }
@@ -174,10 +176,10 @@ return $default(_that.theme);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ThemeMode theme)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ThemeMode theme,  Currency sourceCurrency,  Currency targetCurrency)  $default,) {final _that = this;
 switch (_that) {
 case _Settings():
-return $default(_that.theme);case _:
+return $default(_that.theme,_that.sourceCurrency,_that.targetCurrency);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +196,10 @@ return $default(_that.theme);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ThemeMode theme)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ThemeMode theme,  Currency sourceCurrency,  Currency targetCurrency)?  $default,) {final _that = this;
 switch (_that) {
 case _Settings() when $default != null:
-return $default(_that.theme);case _:
+return $default(_that.theme,_that.sourceCurrency,_that.targetCurrency);case _:
   return null;
 
 }
@@ -209,10 +211,12 @@ return $default(_that.theme);case _:
 @JsonSerializable()
 
 class _Settings implements Settings {
-  const _Settings({required this.theme});
+  const _Settings({required this.theme, this.sourceCurrency = Currency.jpy, this.targetCurrency = Currency.cad});
   factory _Settings.fromJson(Map<String, dynamic> json) => _$SettingsFromJson(json);
 
 @override final  ThemeMode theme;
+@override@JsonKey() final  Currency sourceCurrency;
+@override@JsonKey() final  Currency targetCurrency;
 
 /// Create a copy of Settings
 /// with the given fields replaced by the non-null parameter values.
@@ -227,16 +231,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Settings&&(identical(other.theme, theme) || other.theme == theme));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Settings&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.sourceCurrency, sourceCurrency) || other.sourceCurrency == sourceCurrency)&&(identical(other.targetCurrency, targetCurrency) || other.targetCurrency == targetCurrency));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,theme);
+int get hashCode => Object.hash(runtimeType,theme,sourceCurrency,targetCurrency);
 
 @override
 String toString() {
-  return 'Settings(theme: $theme)';
+  return 'Settings(theme: $theme, sourceCurrency: $sourceCurrency, targetCurrency: $targetCurrency)';
 }
 
 
@@ -247,7 +251,7 @@ abstract mixin class _$SettingsCopyWith<$Res> implements $SettingsCopyWith<$Res>
   factory _$SettingsCopyWith(_Settings value, $Res Function(_Settings) _then) = __$SettingsCopyWithImpl;
 @override @useResult
 $Res call({
- ThemeMode theme
+ ThemeMode theme, Currency sourceCurrency, Currency targetCurrency
 });
 
 
@@ -264,10 +268,12 @@ class __$SettingsCopyWithImpl<$Res>
 
 /// Create a copy of Settings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? theme = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? theme = null,Object? sourceCurrency = null,Object? targetCurrency = null,}) {
   return _then(_Settings(
 theme: null == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
-as ThemeMode,
+as ThemeMode,sourceCurrency: null == sourceCurrency ? _self.sourceCurrency : sourceCurrency // ignore: cast_nullable_to_non_nullable
+as Currency,targetCurrency: null == targetCurrency ? _self.targetCurrency : targetCurrency // ignore: cast_nullable_to_non_nullable
+as Currency,
   ));
 }
 

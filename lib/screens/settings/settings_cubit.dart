@@ -10,8 +10,15 @@ class SettingsCubit extends Cubit<SettingsState> {
   SettingsCubit(this._localStorageService) : super(const SettingsState.initial());
 
   final LocalStorageService _localStorageService;
-  
+
   static const storageKey = 'settings';
+
+  Settings get currentSettings {
+    final currentState = state;
+    if (currentState is SettingsUpdated) return currentState.settings;
+    if (currentState is SettingsLoaded) return currentState.settings;
+    return const Settings(theme: ThemeMode.system);
+  }
 
   void loadSettings() {
     emit(const SettingsState.loading());

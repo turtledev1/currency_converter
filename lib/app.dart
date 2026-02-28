@@ -1,6 +1,8 @@
+import 'package:currency_converter/datasources/exchange_rate_service.dart';
 import 'package:currency_converter/datasources/local_storage_service.dart';
 import 'package:currency_converter/injection.dart';
 import 'package:currency_converter/routing/route_names.dart';
+import 'package:currency_converter/screens/home/converter_cubit.dart';
 import 'package:currency_converter/screens/settings/settings_cubit.dart';
 import 'package:currency_converter/screens/settings/settings_state.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +21,15 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SettingsCubit(getIt<LocalStorageService>()),
         ),
+        BlocProvider(
+          create: (context) => ConverterCubit(
+            getIt<ExchangeRateService>(),
+            context.read<SettingsCubit>(),
+          )..initialize(),
+        ),
       ],
       child: BlocListener<SettingsCubit, SettingsState>(
         listener: (context, state) {
-          // After the settings are loaded, leave the splash screen and navigate to the home screen
           if (state is SettingsLoaded) {
             _router.goNamed(RouteNames.home);
           }
@@ -36,11 +43,13 @@ class MyApp extends StatelessWidget {
               title: 'Currency Converter',
               themeMode: themeMode,
               theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+                useMaterial3: true,
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
               ),
               darkTheme: ThemeData(
+                useMaterial3: true,
                 colorScheme: ColorScheme.fromSeed(
-                  seedColor: Colors.green,
+                  seedColor: Colors.indigo,
                   brightness: Brightness.dark,
                 ),
               ),

@@ -9,6 +9,8 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:currency_converter/datasources/exchange_rate_service.dart'
+    as _i973;
 import 'package:currency_converter/datasources/local_storage_service.dart'
     as _i409;
 import 'package:currency_converter/routing/app_router.dart' as _i650;
@@ -29,6 +31,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i409.LocalStorageService>(() => _i409.LocalStorageService());
     gh.factory<_i722.TextBlockProcessor>(() => _i722.TextBlockProcessor());
     gh.lazySingleton<_i583.GoRouter>(() => routerModule.router());
+    gh.lazySingleton<_i973.ExchangeRateService>(
+      () => _i973.ExchangeRateService(gh<_i409.LocalStorageService>()),
+    );
     return this;
   }
 }

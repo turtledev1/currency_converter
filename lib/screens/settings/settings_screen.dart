@@ -19,8 +19,6 @@ class SettingsScreen extends StatelessWidget {
             Divider(),
             AppearanceRow(),
             Divider(),
-            FromCurrencyRow(),
-            Divider(),
           ],
         ),
       ),
@@ -79,47 +77,6 @@ class AppearanceRow extends StatelessWidget {
                   },
                 ),
               ],
-            );
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class FromCurrencyRow extends StatelessWidget {
-  const FromCurrencyRow({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          'From Currency',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        BlocBuilder<SettingsCubit, SettingsState>(
-          builder: (context, state) {
-            if (state is! SettingsUpdated) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
-            return DropdownButton<String>(
-              value: 'CAD',
-              items: ['CAD', 'USD'].map((currency) {
-                return DropdownMenuItem<String>(
-                  value: currency,
-                  child: Text(currency),
-                );
-              }).toList(),
-              onChanged: (newValue) {
-                if (newValue != null) {
-                  // TODO: change in settings
-                  print('Selected currency: $newValue');
-                }
-              },
             );
           },
         ),
